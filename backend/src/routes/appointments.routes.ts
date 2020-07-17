@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { uuid } from 'uuidv4';
 import { parseISO, startOfHour, isEqual } from 'date-fns';
 import Appointment from '../models/Appointment';
 
