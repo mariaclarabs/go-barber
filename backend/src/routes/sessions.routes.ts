@@ -15,10 +15,15 @@ sessionsRouter.post('/', async (req, res) => {
       password,
     });
 
-    // @ts-expect-error
-    delete user.password;
+    const userWithoutPassword = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    };
 
-    return res.json({ user, token });
+    return res.json({ user: userWithoutPassword, token });
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }

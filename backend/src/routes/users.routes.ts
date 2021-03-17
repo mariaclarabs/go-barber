@@ -21,10 +21,15 @@ usersRouter.post('/', async (req, res) => {
       password,
     });
 
-    // @ts-expect-error
-    delete user.password;
+    const userWithoutPassword = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    };
 
-    return res.json(user);
+    return res.json(userWithoutPassword);
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }
@@ -43,10 +48,16 @@ usersRouter.patch(
         avatarFilename: req.file.filename,
       });
 
-      // @ts-expect-error
-      delete user.password;
+      const userWithoutPassword = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      };
 
-      return res.json(user);
+      return res.json(userWithoutPassword);
     } catch (err) {
       return res.status(400).json({ error: err.message });
     }
